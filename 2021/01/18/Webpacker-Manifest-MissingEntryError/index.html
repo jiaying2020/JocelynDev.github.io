@@ -153,6 +153,10 @@
 
     
     
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>198 Words</span>
+        </span>
+    
     
         <span class="article-min2read article-meta-item">
             <i class="fas fa-clock"></i> <span>1 Mins</span>
@@ -167,7 +171,20 @@
         
 
         <div class="article-content markdown-body">
-            
+            <h1 id="Webpacker-Manifest-MissingEntryError"><a href="#Webpacker-Manifest-MissingEntryError" class="headerlink" title="Webpacker::Manifest::MissingEntryError"></a>Webpacker::Manifest::MissingEntryError</h1><h2 id="基礎設定"><a href="#基礎設定" class="headerlink" title="基礎設定"></a>基礎設定</h2><p>環境：<br>ruby ‘2.7.2’<br>gem ‘rails’, ‘~&gt; 6.1.1’</p>
+<p>新new一個app的時候，會噴錯誤畫面如下<br>Webpacker can’t find application.js in /Users/atroposlee/BBBB/public/packs/manifest.json.</p>
+<p><img src="https://i.imgur.com/yfuCkiT.png"></p>
+<p>Rails 6 之後預設用 webpacker 來處理 JavaScript，但預設仍保留功能比較簡單 Asset Pipeline 來處理 CSS。ails裡只有public這個目錄是公開讀取的。</p>
+<p>看了一下public，的確少了以往常駐的那一包packs，因此這一行就會噴錯<br>  &lt;%= javascript_pack_tag ‘application’, ‘data-turbolinks-track’: ‘reload’ %&gt;<br><img src="https://i.imgur.com/uEoEpfe.png"></p>
+<h3 id="解決方式1："><a href="#解決方式1：" class="headerlink" title="解決方式1："></a>解決方式1：</h3><p>新增 Procfile 的檔案後用 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foreman s</span><br></pre></td></tr></table></figure>
+<p>等於是同時啟動 port 3000 的rails server，webpack-dev-server 了。<br>但靈異點在於，我沒有裝 foreman 但還是可以跑 🤔 那個foreman呢！！！！在異次元嗎？</p>
+<h3 id="解決方式2："><a href="#解決方式2：" class="headerlink" title="解決方式2："></a>解決方式2：</h3><p>把Asset Pipeline 加回去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails webpacker:compile</span><br></pre></td></tr></table></figure>
+
+
+
+
         </div>
 
         
@@ -303,7 +320,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Webpacker-Manifest-MissingEntryError"><span class="nav-number">1.</span> <span class="nav-text">Webpacker::Manifest::MissingEntryError</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">基礎設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E5%BC%8F1%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">解決方式1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E5%BC%8F2%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">解決方式2：</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
