@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Jocelyn Lee">
+    
+    <title>
+        
+            設定devise |
+        
+        Jocelyn&#39;s Dev
+    </title>
+    <link rel="shortcut icon" href="https://i.imgur.com/yGyTVsH.png">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true},"style":{"primary_color":"#0066CC","avatar":"https://i.imgur.com/yGyTVsH.png","favicon":"https://i.imgur.com/yGyTVsH.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Ruby on Rails 後端工程師 | 綠色是本命的數位宅女 | 不負責使用者體驗 | 失敗迭代史學家 | 人生版本控管 |"}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.1.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    <span class="scroll-progress-bar"></span>
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Jocelyn&#39;s Dev
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">設定devise</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="https://i.imgur.com/yGyTVsH.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span>Jocelyn Lee</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-calendar"></i> 2021-01-18 00:21:23
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>720 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>3 Mins</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="設定devise"><a href="#設定devise" class="headerlink" title="設定devise"></a>設定devise</h1><h2 id="基礎設定"><a href="#基礎設定" class="headerlink" title="基礎設定"></a>基礎設定</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/heartcombo/devise" >devise的github<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails generate devise:install</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/dwZ73Dj.png"></p>
+<p>不只產生檔案，devise會給你一些基本設定的建議</p>
+<p><img src="https://i.imgur.com/LGrWBZf.png"></p>
+<p>建立 devise的 User model</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate devise User</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/vwidO7a.png"></p>
+<p>你也可以透過devise給的建議直接從devise弄出view</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:views</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/HGMyd3w.png"></p>
+<p>不要忘記 轉換成真實的資料表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails db:migrate</span><br></pre></td></tr></table></figure>
+<p>為了讓登入登出通過驗證，要在ueer 裡的application_controller 裡加上這行 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">before_action :authenticate_user!</span><br></pre></td></tr></table></figure>
+
+<h2 id="設定-controller"><a href="#設定-controller" class="headerlink" title="設定 controller"></a>設定 controller</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:controllers users</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/I6Skz9y.png"></p>
+<p>新增路徑</p>
+<p>確認model 的設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devise :registerable, :confirmable</span><br></pre></td></tr></table></figure>
+
+<p>建立遷移檔</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/heartcombo/devise/wiki/How-To:-Add-:confirmable-to-Users" >官方設定<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g migration add_confirmable_to_devise</span><br></pre></td></tr></table></figure>
+<p>修改<br>config/initializers/devise.rb<br>true =&gt; false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.reconfirmable &#x3D; false</span><br></pre></td></tr></table></figure>
+<p>接著重開rails s  就可以看到精美的登入畫面</p>
+<p><img src="https://i.imgur.com/76lNENV.png"></p>
+<p>此時註冊密碼後，有時候會發生收不到註冊信的窘境<br>這時候可以加入gem <a class="link"   target="_blank" rel="noopener" href="https://github.com/ryanb/letter_opener" >letter_opener<i class="fas fa-external-link-alt"></i></a>直接在瀏覽器上預覽信件畫面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &quot;letter_opener&quot;, :group &#x3D;&gt; :development</span><br></pre></td></tr></table></figure>
+<h2 id="信箱驗證"><a href="#信箱驗證" class="headerlink" title="信箱驗證"></a>信箱驗證</h2><h3 id="別忘了bundle-install⭐️"><a href="#別忘了bundle-install⭐️" class="headerlink" title="別忘了bundle install⭐️"></a>別忘了bundle install⭐️</h3><p>想用將 local host 設為mail的url，可在config/environments/development.rb 加入這行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.action_mailer.delivery_method &#x3D; :letter_opener</span><br><span class="line">config.action_mailer.perform_deliveries &#x3D; true</span><br></pre></td></tr></table></figure>
+<p>以下這行是建議在development.rb跟test,rb都要加上，以免運行測試環境噴錯</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.action_mailer.default_url_options &#x3D; &#123; :host &#x3D;&gt; &#39;localhost:3000&#39; &#125;</span><br></pre></td></tr></table></figure>
+<p>或者是在initializers/devise.rb 裡把自己的mail加上去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.mailer_sender &#x3D; &#39;biheyeblue@gmail.com&#39;</span><br></pre></td></tr></table></figure>
+<p>這樣你就可以順利註冊，然後在預覽畫面收到認證信<br><img src="https://i.imgur.com/2MSoOWJ.png"></p>
+<p>然後如果忘記密碼，也可以收到認證信囉～<br><img src="https://i.imgur.com/7u7MFfl.png"></p>
+<p>終於順利登入自己的網站  👏👏👏👏</p>
+<p><img src="https://i.imgur.com/uT4c7gF.png"></p>
+<p>小提醒：</p>
+<p>如果你的models/user.rb 裡面有 :trackable 記得拔掉，會噴錯</p>
+<h2 id="改變語系"><a href="#改變語系" class="headerlink" title="改變語系"></a>改變語系</h2><p>確認加入gemflie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &#39;devise-i18n&#39;</span><br></pre></td></tr></table></figure>
+<p>接著刪掉舊有的devise view</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails d devise:views</span><br></pre></td></tr></table></figure>
+<p>再新增devise-i18n的 view</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:i18n:views </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/RuBZl9p.png"></p>
+<p>接著到config/application.rb加入這行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.i18n.default_locale &#x3D; &quot;zh-TW&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p>重開 rails s </p>
+<p>就可以看到登入時的中文指令</p>
+<p><img src="https://i.imgur.com/uTN2iwr.png"></p>
+<p>如果登出噴錯誤畫面 <font color=#FF0000>No route matches [GET] “/users/sign_out”</font>，在 routes.rb 輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">devise_for :users</span><br><span class="line">devise_scope :user do</span><br><span class="line">  get &#39;&#x2F;users&#x2F;sign_out&#39; &#x3D;&gt; &#39;devise&#x2F;sessions#destroy&#39;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>就可以順利登出囉，此時你也看到登入畫面部分已經是中文資訊</p>
+<p><img src="https://i.imgur.com/D8N0ybq.png"></p>
+<p>新增欄位</p>
+<p>到registrations/new.html.erb 加入 name欄位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;field&quot;&gt;</span><br><span class="line">&lt;%&#x3D; f.label :name %&gt;&lt;br &#x2F;&gt;</span><br><span class="line">&lt;%&#x3D; f.text_field :name, autofocus: true%&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>為了讓新增的欄位可以寫進資料庫，在application_controller.rb 中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private</span><br><span class="line">def configure_permitted_parameters</span><br><span class="line">devise_parameter_sanitizer.permit(:sign_up, keys: [:name])</span><br><span class="line">devise_parameter_sanitizer.permit(:account_update, keys: [:name])</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>設定name欄不能為空，在model的user.rb下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validates :name, presence :true</span><br></pre></td></tr></table></figure>
+<p>就會成功出現提醒畫面<br><img src="https://i.imgur.com/HXPqoKH.png"></p>
+<p>把name改成中文名稱</p>
+<p>複製一份 devise-i18n的 zh-TW.yml 到 locales 底下，然後在裡面新增一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name: 使用者名稱</span><br></pre></td></tr></table></figure>
+<p>重開rails s就可以看到變成使用者名稱<br><img src="https://i.imgur.com/blM4z2k.png"></p>
+<p>如果不想要驗證錯誤的時候破版，可在config/environment.rb裡輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ActionView::Base.field_error_proc &#x3D; Proc.new do |html_tag, instance|</span><br><span class="line">    html_tag.html_safe</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/18/%E8%A8%AD%E5%AE%9A-rails-admin/"
+                        >
+                            <span class="left arrow-icon flex-center" >
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">設定 rails_admin</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/18/PostgreSQL%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">PostgreSQL環境設定</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center" >
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Jocelyn Lee</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.1.3</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-top flex-center">
+            <i class="fas fa-arrow-up"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul>
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Adevise"><span class="nav-number">1.</span> <span class="nav-text">設定devise</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">基礎設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-controller"><span class="nav-number">1.2.</span> <span class="nav-text">設定 controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E7%AE%B1%E9%A9%97%E8%AD%89"><span class="nav-number">1.3.</span> <span class="nav-text">信箱驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A5%E5%BF%98%E4%BA%86bundle-install%E2%AD%90%EF%B8%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">別忘了bundle install⭐️</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%AE%8A%E8%AA%9E%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">改變語系</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
