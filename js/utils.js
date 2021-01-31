@@ -166,7 +166,7 @@ KEEP.initUtils = () => {
         }
       }
 
-      const imageViewerDom = document.querySelector('.image-viewer-container');
+      const imageViewerDom = document.querySelector('.image-viewer-');
       const targetImg = document.querySelector('.image-viewer-container img');
       imageViewerDom && imageViewerDom.addEventListener('click', () => {
         isBigImage = false;
