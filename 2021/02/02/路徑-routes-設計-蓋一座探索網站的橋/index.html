@@ -9,7 +9,7 @@
     
     <title>
         
-            眾人尋你千百度的N+1問題 |
+            路徑(routes)設計:蓋一座探索網站的橋 |
         
         Jocelyn&#39;s Dev
     </title>
@@ -130,7 +130,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">眾人尋你千百度的N+1問題</span>
+            <span class="title-hover-animation">路徑(routes)設計:蓋一座探索網站的橋</span>
         </div>
 
         
@@ -146,26 +146,15 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-calendar"></i> 2021-02-02 10:47:16
+        <i class="fas fa-calendar"></i> 2021-02-02 12:35:11
     </span>
     
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>
-            <ul>
-                
-                    <li>
-                        <a href="/tags/n-1/">n+1</a>
-                    </li>
-                
-            </ul>
-        </span>
     
 
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>240 Words</span>
+            <i class="fas fa-file-word"></i> <span>322 Words</span>
         </span>
     
     
@@ -182,14 +171,41 @@
         
 
         <div class="article-content markdown-body">
-            <p><font color=#800000><strong>Rails</strong></font>透過抽象層model讀取資料庫內容，model彼此也可以建立關聯，但有些指令會造成過多查詢記錄，浪費資料庫效能，這個問題稱之為N+1。</p>
-<p>N+1的意思是就是在迴圈中查詢N筆資料，再加上開頭總查詢的那1筆。非常吃資料庫記憶體。<br>因此，<font color=#800000><strong>Rails</strong></font>提供解決方案<font color=#008000><strong>include</strong></font>和<font color=#008000><strong>join</strong></font>。但還是有些微的差異</p>
+            <p><strong>看所有路徑</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rails routes</span><br></pre></td></tr></table></figure>
+<p><strong>指定首頁</strong></p>
 <ol>
-<li><font color=#008000><strong>join</strong></font>用於過濾model之間的關係，但對查詢筆數來說不見得會變少。因為他不會同時查詢關聯資料。如果怕回傳相同資料，可以使用<font color=#008000><strong>.uniq</strong></font>來排除。</li>
-<li><font color=#008000><strong>include</strong></font>主要用於將大量資料在同一次查詢裡查好你要的東西。也可以一並查詢關聯資料。</li>
+<li>寫法一<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get &quot;&#x2F;&quot;, to: &quot;welcome#index&quot;</span><br></pre></td></tr></table></figure></li>
+<li>寫法二<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root to: &quot;home#index&quot;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>兩者都可以再搭配<font color=#008000><strong>where</strong></font>撈出符合指定條件的資料。</p>
-<p><font color=#b22222><strong>就像交友軟體找對象，有篩選條件勝過你盲滑右邊。</strong></font></p>
+<p><strong>resources:可以快速做出8條路徑7種方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  resources :books</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>單數resource，就不帶id</strong></p>
+<p>如果只想開幾條特定的routes，可用only,except</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources :books, only: [:index, :show]</span><br></pre></td></tr></table></figure>
+<p>反著寫也行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resources :books, except: [:index, :show]</span><br></pre></td></tr></table></figure>
+
+<p>巢狀寫法（但不宜超過2層）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  resources :users do</span><br><span class="line">    resources :books</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>如果你有巢狀，但又希望限定功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  resources :users do</span><br><span class="line">    resources :posts, only: [:index, :new, :create]</span><br><span class="line">  end</span><br><span class="line">  resources :posts, only: [:show, :edit, :update, :destroy]</span><br><span class="line">end</span><br><span class="line">resources :articles do</span><br><span class="line">  resources :comments, shallow: true</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>可以用shallow寫法，效果一樣</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  resources :users do</span><br><span class="line">    resources :posts, shallow: true</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>name space 用法</strong></p>
+<ol>
+<li>後台<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  namespace :admin do</span><br><span class="line">    resources :products</span><br><span class="line">    resources :articles</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure></li>
+<li>api</li>
+</ol>
+<p><font color=#4169e1>/api/v1/books</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line"></span><br><span class="line">  namespace :api do</span><br><span class="line">     namespace :v1 do</span><br><span class="line">      resources :books, only: [:index, :create, :destroy ]</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>指定controller,action的連續技</strong><br><font color=#4169e1>verb ‘/路徑’, action, controller</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">get &#39;&#x2F;apis&#x2F;projects&#39;, action: &#39;projects&#39;,controller: &#39;apis&#39;</span><br><span class="line">get &#39;&#x2F;apis&#x2F;categories&#39;, action: &#39;categories&#39;,controller: &#39;apis&#39;</span><br></pre></td></tr></table></figure>
+<p><strong>member用法 做出來的路徑會帶:id</strong></p>
+<p><font color=#4169e1>/orders/:id/confirm</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line">  resources :orders do</span><br><span class="line">    member do</span><br><span class="line">      post :confirm</span><br><span class="line">      delete :cancel</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>collection用法 做出來的路徑不帶:id</strong><br><font color=#4169e1>/orders/cancelled</font></p>
+<p>```<br>Rails.application.routes.draw do<br>  resources :orders do<br>    collection do<br>      get :cancelled<br>    end<br>  end<br>end</p>
 
         </div>
 
@@ -198,29 +214,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/02/02/%E8%B7%AF%E5%BE%91-routes-%E8%A8%AD%E8%A8%88-%E8%93%8B%E4%B8%80%E5%BA%A7%E6%8E%A2%E7%B4%A2%E7%B6%B2%E7%AB%99%E7%9A%84%E6%A9%8B/"
-                        >
-                            <span class="left arrow-icon flex-center" >
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">路徑(routes)設計:蓋一座探索網站的橋</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/18/%E8%A8%AD%E5%AE%9A-rails-admin/"
+                           href="/2021/02/02/%E7%9C%BE%E4%BA%BA%E5%B0%8B%E4%BD%A0%E5%8D%83%E7%99%BE%E5%BA%A6%E7%9A%84N-1%E5%95%8F%E9%A1%8C/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">設定 rails_admin</span>
+                                <span class="post-nav-title-item">眾人尋你千百度的N+1問題</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center" >
