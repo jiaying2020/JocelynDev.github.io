@@ -154,7 +154,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>720 Words</span>
+            <i class="fas fa-file-word"></i> <span>799 Words</span>
         </span>
     
     
@@ -187,10 +187,9 @@
 <p>為了讓登入登出通過驗證，要在ueer 裡的application_controller 裡加上這行 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">before_action :authenticate_user!</span><br></pre></td></tr></table></figure>
 
-<h2 id="設定-controller"><a href="#設定-controller" class="headerlink" title="設定 controller"></a>設定 controller</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:controllers users</span><br></pre></td></tr></table></figure>
+<h2 id="設定-routes"><a href="#設定-routes" class="headerlink" title="設定 routes"></a>設定 routes</h2><h2 id="設定-controller"><a href="#設定-controller" class="headerlink" title="設定 controller"></a>設定 controller</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:controllers users</span><br></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/I6Skz9y.png"></p>
-<p>新增路徑</p>
-<p>確認model 的設定</p>
+<h2 id="model-的設定"><a href="#model-的設定" class="headerlink" title="model 的設定"></a>model 的設定</h2><p>(不需信箱認證就不要放confirmable)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devise :registerable, :confirmable</span><br></pre></td></tr></table></figure>
 
 <p>建立遷移檔</p>
@@ -198,11 +197,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g migration add_confirmable_to_devise</span><br></pre></td></tr></table></figure>
 <p>修改<br>config/initializers/devise.rb<br>true =&gt; false</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.reconfirmable &#x3D; false</span><br></pre></td></tr></table></figure>
+<h2 id="設定畫面"><a href="#設定畫面" class="headerlink" title="設定畫面"></a>設定畫面</h2><p>app/views/layouts/application.html.erb</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%&#x3D; render &#39;layouts&#x2F;nav&#39;%&gt;</span><br></pre></td></tr></table></figure>
+<p>接著新增_nav.html.erb，加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;% if current_user %&gt;</span><br><span class="line">   &lt;%&#x3D; link_to &#39;登出&#39;, destroy_user_session_path, method: :delete, class: &quot;nav-link&quot;  %&gt;</span><br><span class="line">   &lt;% else%&gt;</span><br><span class="line">    &lt;%&#x3D; link_to &#39;登入&#39;, user_session_path, class: &quot;nav-link&quot;%&gt;</span><br><span class="line">&lt;% end %&gt;</span><br></pre></td></tr></table></figure>
 <p>接著重開rails s  就可以看到精美的登入畫面</p>
 <p><img src="https://i.imgur.com/76lNENV.png"></p>
 <p>此時註冊密碼後，有時候會發生收不到註冊信的窘境<br>這時候可以加入gem <a class="link"   target="_blank" rel="noopener" href="https://github.com/ryanb/letter_opener" >letter_opener<i class="fas fa-external-link-alt"></i></a>直接在瀏覽器上預覽信件畫面</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem &quot;letter_opener&quot;, :group &#x3D;&gt; :development</span><br></pre></td></tr></table></figure>
-<h2 id="信箱驗證"><a href="#信箱驗證" class="headerlink" title="信箱驗證"></a>信箱驗證</h2><h3 id="別忘了bundle-install⭐️"><a href="#別忘了bundle-install⭐️" class="headerlink" title="別忘了bundle install⭐️"></a>別忘了bundle install⭐️</h3><p>想用將 local host 設為mail的url，可在config/environments/development.rb 加入這行</p>
+<h2 id="信箱驗證（不設可以跳過）"><a href="#信箱驗證（不設可以跳過）" class="headerlink" title="信箱驗證（不設可以跳過）"></a>信箱驗證（不設可以跳過）</h2><p>想用將 local host 設為mail的url，可在config/environments/development.rb 加入這行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.action_mailer.delivery_method &#x3D; :letter_opener</span><br><span class="line">config.action_mailer.perform_deliveries &#x3D; true</span><br></pre></td></tr></table></figure>
 <p>以下這行是建議在development.rb跟test,rb都要加上，以免運行測試環境噴錯</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.action_mailer.default_url_options &#x3D; &#123; :host &#x3D;&gt; &#39;localhost:3000&#39; &#125;</span><br></pre></td></tr></table></figure>
@@ -381,7 +384,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Adevise"><span class="nav-number">1.</span> <span class="nav-text">設定devise</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">基礎設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-controller"><span class="nav-number">1.2.</span> <span class="nav-text">設定 controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E7%AE%B1%E9%A9%97%E8%AD%89"><span class="nav-number">1.3.</span> <span class="nav-text">信箱驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A5%E5%BF%98%E4%BA%86bundle-install%E2%AD%90%EF%B8%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">別忘了bundle install⭐️</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%AE%8A%E8%AA%9E%E7%B3%BB"><span class="nav-number">1.4.</span> <span class="nav-text">改變語系</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Adevise"><span class="nav-number">1.</span> <span class="nav-text">設定devise</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.1.</span> <span class="nav-text">基礎設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-routes"><span class="nav-number">1.2.</span> <span class="nav-text">設定 routes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-controller"><span class="nav-number">1.3.</span> <span class="nav-text">設定 controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model-%E7%9A%84%E8%A8%AD%E5%AE%9A"><span class="nav-number">1.4.</span> <span class="nav-text">model 的設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E7%95%AB%E9%9D%A2"><span class="nav-number">1.5.</span> <span class="nav-text">設定畫面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%A1%E7%AE%B1%E9%A9%97%E8%AD%89%EF%BC%88%E4%B8%8D%E8%A8%AD%E5%8F%AF%E4%BB%A5%E8%B7%B3%E9%81%8E%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">信箱驗證（不設可以跳過）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E8%AE%8A%E8%AA%9E%E7%B3%BB"><span class="nav-number">1.7.</span> <span class="nav-text">改變語系</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
