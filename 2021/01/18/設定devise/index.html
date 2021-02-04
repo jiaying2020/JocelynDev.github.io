@@ -154,7 +154,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>827 Words</span>
+            <i class="fas fa-file-word"></i> <span>858 Words</span>
         </span>
     
     
@@ -187,7 +187,8 @@
 <p>為了讓登入登出通過驗證，要在ueer 裡的application_controller 裡加上這行 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">before_action :authenticate_user!</span><br></pre></td></tr></table></figure>
 
-<h2 id="設定-routes"><a href="#設定-routes" class="headerlink" title="設定 routes"></a>設定 routes</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line"></span><br><span class="line">  root to: &quot;home#index&quot;</span><br><span class="line"></span><br><span class="line">  devise_for :users, controllers: &#123; </span><br><span class="line">    sessions: &#39;users&#x2F;sessions&#39;, </span><br><span class="line">    registrations: &quot;users&#x2F;registrations&quot;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h2 id="設定-routes"><a href="#設定-routes" class="headerlink" title="設定 routes"></a>設定 routes</h2><p>如果想設定登入後的跳轉首頁，可以自己新增該名字的controller和對應的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.routes.draw do</span><br><span class="line"></span><br><span class="line">  root to: &quot;home#index&quot;</span><br><span class="line"></span><br><span class="line">  devise_for :users, controllers: &#123; </span><br><span class="line">    sessions: &#39;users&#x2F;sessions&#39;, </span><br><span class="line">    registrations: &quot;users&#x2F;registrations&quot;,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="設定-controller"><a href="#設定-controller" class="headerlink" title="設定 controller"></a>設定 controller</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g devise:controllers users</span><br></pre></td></tr></table></figure>
